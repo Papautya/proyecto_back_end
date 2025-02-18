@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=dispositivo, initial-scale=1.0">
+    <title>Dispositivos Inteligentes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-primary mb-4">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Dispositivos Inteligentes</span>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <input type="text" id="search" class="form-control" placeholder="Buscar dispositivos...">
+            </div>
+            <div class="col-md-4">
+                <select id="filter" class="form-select">
+                    <option value="">Filtrar por tipo</option>
+                    <option value="Móvil">Móvil</option>
+                    <option value="Portátil">Portátil</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-outline-primary w-100">Buscar</button>
+            </div>
+        </div>
+
+        <!-- Aca es donde va a salir la lista de dispositivos -->
+        <div class="row" id="dispositivos-container">
+        </div>
+
+        <div id="dispositivo-detail" class="mt-4">
+            <h3 id="detail-title"></h3>
+            <p id="detail-description"></p>
+            <p id="detail-release"></p>
+            <p id="detail-type"></p>
+            <h5>Comentarios:</h5>
+            <ul id="comments-list" class="list-group mb-3"></ul>
+            <textarea id="comment-input" class="form-control mb-2" placeholder="Escriba su comentario..."></textarea>
+            <button class="btn btn-success">Agregar Comentario</button>
+            <button class="btn btn-secondary mt-2">Cerrar Detalle</button>
+        </div>
+    </div>
+
+    <script>
+        const dispositivos = [
+            { id: 1, nombre: 'iPhone 15', marca: 'Apple', fecha: '2024-01-10', tipo: 'Móvil', descripcion: 'El último iPhone con tecnología avanzada.' },
+            { id: 2, nombre: 'Galaxy S24', marca: 'Samsung', fecha: '2024-02-15', tipo: 'Móvil', descripcion: 'Innovador diseño y potencia.' },
+            { id: 3, nombre: 'MacBook Pro M3', marca: 'Apple', fecha: '2023-11-01', tipo: 'Portátil', descripcion: 'Rendimiento excepcional para profesionales.' },
+            { id: 4, nombre: 'Xiaomi 13 Ultra', marca: 'Xiaomi', fecha: '2023-09-10', tipo: 'Móvil', descripcion: 'Cámara avanzada y gran rendimiento.' },
+            { id: 5, nombre: 'Dell XPS 15', marca: 'Dell', fecha: '2023-05-15', tipo: 'Portátil', descripcion: 'Pantalla 4K y gran potencia.' },
+            { id: 6, nombre: 'Huawei Mate 50 Pro', marca: 'Huawei', fecha: '2022-11-20', tipo: 'Móvil', descripcion: 'Elegancia y rendimiento de alto nivel.' },
+            { id: 7, nombre: 'Lenovo ThinkPad X1', marca: 'Lenovo', fecha: '2023-08-01', tipo: 'Portátil', descripcion: 'Diseñado para profesionales exigentes.' },
+            { id: 8, nombre: 'OPPO Find X6 Pro', marca: 'OPPO', fecha: '2023-06-10', tipo: 'Móvil', descripcion: 'Innovador y con carga rápida.' },
+            { id: 9, nombre: 'ASUS ROG Zephyrus G14', marca: 'ASUS', fecha: '2023-04-18', tipo: 'Portátil', descripcion: 'Rendimiento gaming en formato compacto.' },
+            { id: 10, nombre: 'Samsung Galaxy Book 3', marca: 'Samsung', fecha: '2023-10-12', tipo: 'Portátil', descripcion: 'Portátil versátil con pantalla AMOLED.' }
+        ];
+
+        const comments = {};
+
+        function filterDispositivos() {
+            const filteredDispositivos = dispositivos.filter(dispositivo =>
+                dispositivo.nombre.toLowerCase()
+            );
+
+            const container = document.getElementById('dispositivos-container');
+            container.innerHTML = '';
+
+            filteredDispositivos.forEach(dispositivo => {
+                const card = `<div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">${dispositivo.nombre}</h5>
+                            <p class="card-text">Marca: ${dispositivo.marca}</p>
+                            <p class="card-text">Fecha de lanzamiento: ${dispositivo.fecha}</p>
+                            <p class="card-text">Tipo: ${dispositivo.tipo}</p>
+                        </div>
+                    </div>
+                </div>`;
+                container.innerHTML += card;
+            });
+        }
+
+        window.onload = filterDispositivos;
+    </script>
+</body>
+
+</html>
